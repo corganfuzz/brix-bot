@@ -36,8 +36,8 @@ const SplashScreen = ({ onFinish }) => {
     >
       <View style={styles.logoContainer}>
         <DatabrixLogo
-          width={Math.min(width, height) * 0.8}
-          height={Math.min(width, height) * 0.4}
+          width={Math.min(width, height) * 0.56}
+          height={Math.min(width, height) * 0.28}
         />
       </View>
     </Animated.View>
