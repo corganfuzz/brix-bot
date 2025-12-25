@@ -3,8 +3,8 @@ const USE_LOCAL_PROXY = false;
 
 const LOCAL_PROXY_URL = 'http://localhost:3001/invoke-agent';
 
-const API_GATEWAY_URL = '';
-const API_KEY = '';
+const API_GATEWAY_URL = 'https://placeholder-api-gateway.com';
+const API_KEY = 'placeholder-api-key';
 
 const fetchChatAPI = async (message, sessionId = null) => {
   const url = USE_LOCAL_PROXY ? LOCAL_PROXY_URL : API_GATEWAY_URL;

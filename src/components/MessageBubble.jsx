@@ -1,13 +1,13 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Alert, Animated} from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated } from 'react-native';
 import PropTypes from 'prop-types';
-import {UserAvatar, ChatBotAvatar} from './Avatar';
-import {TypeAnimation} from 'react-native-type-animation';
+import { UserAvatar, ChatBotAvatar } from './Avatar';
+import { TypeAnimation } from 'react-native-type-animation';
 
-const MessageBubble = ({item, isNew = false, onTypingUpdate, onTypingComplete}) => {
+const MessageBubble = ({ item, isNew = false, onTypingUpdate, onTypingComplete }) => {
   const isUser = item.sender === 'user';
   const [typingComplete, setTypingComplete] = useState(!isNew || isUser);
-  
+
   const avatarComponent = isUser ? <UserAvatar /> : <ChatBotAvatar />;
   const messageContainerStyle = isUser
     ? styles.userMessageContainer
@@ -25,7 +25,7 @@ const MessageBubble = ({item, isNew = false, onTypingUpdate, onTypingComplete}) 
   }
 
   const pulseAnim = useRef(new Animated.Value(1)).current;
-  
+
   useEffect(() => {
     if (item.hasRealTimeData && !isUser) {
       Animated.loop(
@@ -48,15 +48,15 @@ const MessageBubble = ({item, isNew = false, onTypingUpdate, onTypingComplete}) 
   const handleCitationPress = (citationNum) => {
     const citations = item.citations || {};
     const citation = citations[citationNum];
-    
+
     if (citation) {
       const source = citation.source || 'Unknown';
       const uri = citation.uri || '';
-      
+
       Alert.alert(
         `Citation [${citationNum}]`,
         `Source: ${source}\n\nFull path:\n${uri}`,
-        [{text: 'OK', style: 'default'}]
+        [{ text: 'OK', style: 'default' }]
       );
     } else {
       Alert.alert('Citation', `Citation [${citationNum}] source not available`);
@@ -70,23 +70,23 @@ const MessageBubble = ({item, isNew = false, onTypingUpdate, onTypingComplete}) 
       'This response includes live economic data from the Federal Reserve Bank of St. Louis.\n\n' +
       'Source: FRED API\n' +
       'Website: fred.stlouisfed.org',
-      [{text: 'OK', style: 'default'}]
+      [{ text: 'OK', style: 'default' }]
     );
   };
 
   const renderMessageContent = () => {
     const message = item.message || '';
-    
+
     const citationRegex = /\[(\d+)\]/g;
     const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi;
-    
+
     const hasCitations = citationRegex.test(message);
     const hasEmails = emailRegex.test(message);
-    
+
     const renderRichContent = (currentText) => {
       const combinedRegex = /(\[\d+\]|[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/g;
       const parts = currentText.split(combinedRegex);
-      
+
       return (
         <Text style={messageTextStyle}>
           {parts.map((part, index) => {
@@ -94,8 +94,8 @@ const MessageBubble = ({item, isNew = false, onTypingUpdate, onTypingComplete}) 
             if (citationMatch && !isUser) {
               const citationNum = citationMatch[1];
               return (
-                <TouchableOpacity 
-                  key={index} 
+                <TouchableOpacity
+                  key={index}
                   onPress={() => handleCitationPress(citationNum)}
                   activeOpacity={0.7}
                 >
@@ -103,24 +103,24 @@ const MessageBubble = ({item, isNew = false, onTypingUpdate, onTypingComplete}) 
                 </TouchableOpacity>
               );
             }
-            
+
             const emailMatch = part.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+$/);
             if (emailMatch) {
               return (
                 <Text key={index} style={styles.email}>{part}</Text>
               );
             }
-            
+
             return <Text key={index}>{part}</Text>;
           })}
         </Text>
       );
     };
-    
+
     if (!isUser && isNew) {
       return (
         <TypeAnimation
-          sequence={[{text: message}]}
+          sequence={[{ text: message }]}
           typeSpeed={1} // Fast typing: 15ms per character = 66 chars/sec (ChatGPT-like)
           cursor={true} // Show blinking cursor
           blinkSpeed={300} // Fast cursor blink (300ms)
@@ -129,11 +129,11 @@ const MessageBubble = ({item, isNew = false, onTypingUpdate, onTypingComplete}) 
             fontWeight: '400',
           }}
           style={messageTextStyle}
-          onCharTyped={({currentText}) => {
+          onCharTyped={({ currentText }) => {
             if (onTypingUpdate) {
               onTypingUpdate();
             }
-            
+
             if (currentText.length === message.length) {
               setTimeout(() => {
                 setTypingComplete(true);
@@ -146,11 +146,11 @@ const MessageBubble = ({item, isNew = false, onTypingUpdate, onTypingComplete}) 
         />
       );
     }
-    
+
     if ((hasCitations && !isUser) || hasEmails) {
       return renderRichContent(message);
     }
-    
+
     return <Text style={messageTextStyle}>{message}</Text>;
   };
 
@@ -169,14 +169,14 @@ const MessageBubble = ({item, isNew = false, onTypingUpdate, onTypingComplete}) 
       {item.sender === 'user' && avatarComponent}
       <View style={messageContainerStyle}>
         {renderMessageContent()}
-        
+
         {!isUser && item.hasRealTimeData && typingComplete && (
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.liveDataBadgeContainer}
             onPress={handleLiveDataPress}
             activeOpacity={0.7}
           >
-            <Animated.View 
+            <Animated.View
               style={[
                 styles.liveDot,
                 {
@@ -209,13 +209,12 @@ const styles = StyleSheet.create({
   bubbleContainer: {},
   userMessageContainer: {
     alignSelf: 'flex-end',
-    backgroundColor: 'rgba(188,73,129, 0.1)',
+    backgroundColor: '#1B3139',
     borderRadius: 12,
     marginRight: 0,
     borderBottomRightRadius: 0,
     padding: 14,
     maxWidth: '75%',
-    // Add subtle shadow for depth
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -227,49 +226,48 @@ const styles = StyleSheet.create({
   },
   receiverMessageContainer: {
     alignSelf: 'flex-start',
-    backgroundColor: 'rgba(37,73,192, 0.08)',
+    backgroundColor: '#FFFFFF',
     borderRadius: 12,
     borderBottomLeftRadius: 0,
     padding: 14,
     marginRight: 60,
     maxWidth: '75%',
-    // Add subtle shadow for depth
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.05,
     shadowRadius: 2,
     elevation: 2,
   },
   userMessageText: {
-    color: '#1a1a1a',
+    color: '#FFFFFF',
     fontSize: 15,
     lineHeight: 22,
   },
   receiverMessageText: {
-    color: '#1a1a1a',
+    color: '#1B3139',
     fontSize: 15,
     lineHeight: 22,
   },
   citation: {
-    color: 'rgba(37,73,192, 1)',
+    color: '#FF3621',
     fontWeight: '600',
     fontSize: 13,
-    backgroundColor: 'rgba(37,73,192, 0.15)',
+    backgroundColor: '#EEEDE9',
     paddingHorizontal: 4,
     paddingVertical: 2,
     borderRadius: 3,
     marginHorizontal: 2,
   },
   email: {
-    color: '#0066cc',
+    color: '#1B3139',
     fontWeight: '500',
     fontSize: 15,
     fontFamily: 'Courier',
     textDecorationLine: 'none',
-    backgroundColor: 'rgba(0, 102, 204, 0.08)',
+    backgroundColor: 'rgba(27, 49, 57, 0.08)',
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 4,
@@ -283,18 +281,18 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#FF3B30',
+    backgroundColor: '#FF3621',
     marginRight: 6,
   },
   liveDataText: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#FF3B30',
+    color: '#FF3621',
     letterSpacing: 0.5,
     marginRight: 6,
   },
   liveDataSource: {
-    color: 'rgba(37,73,192, 1)',
+    color: '#FF3621',
     fontWeight: '600',
     fontSize: 13,
     textDecorationLine: 'underline',

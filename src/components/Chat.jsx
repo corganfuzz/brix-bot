@@ -1,6 +1,6 @@
-import React, {useState, useRef, useEffect, useCallback} from 'react';
-import {View, FlatList, StyleSheet, Alert, KeyboardAvoidingView, Platform} from 'react-native';
-import {fetchChatAPI} from '../services/api';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { View, FlatList, StyleSheet, Alert, KeyboardAvoidingView, Platform } from 'react-native';
+import { fetchChatAPI } from '../services/api';
 import MessageBubble from './MessageBubble';
 import ChatInput from './ChatInput';
 import TypingIndicator from './TypingIndicator';
@@ -31,16 +31,16 @@ const ChatComponent = () => {
     try {
       setIsTyping(true);
       const result = await fetchChatAPI(message);
-      
+
       setIsTyping(false);
-      
+
       console.log('📥 Received from API:', {
         hasResponse: !!result.response,
         hasCitations: Object.keys(result.citations || {}).length,
         hasRealTimeData: result.hasRealTimeData,
         fullResult: result
       });
-      
+
       const messageId = generateUniqueId();
       const newMessageObj = {
         id: messageId,
@@ -49,12 +49,12 @@ const ChatComponent = () => {
         citations: result.citations || {}, // Include citations
         hasRealTimeData: result.hasRealTimeData || false, // Flag for FRED/real-time data
       };
-      
+
       console.log('📦 Message object created:', {
         hasRealTimeData: newMessageObj.hasRealTimeData,
         sender: newMessageObj.sender
       });
-      
+
       // Mark this as the latest bot message (triggers typewriter)
       setLatestBotMessageId(messageId);
       setMessages(prevMessages => [...prevMessages, newMessageObj]);
@@ -92,11 +92,11 @@ const ChatComponent = () => {
     setLatestBotMessageId(null);
   }, []);
 
-  const renderMessage = ({item}) => {
+  const renderMessage = ({ item }) => {
     const isNew = item.id === latestBotMessageId && item.sender === 'bot';
     return (
-      <MessageBubble 
-        item={item} 
+      <MessageBubble
+        item={item}
         isNew={isNew}
         onTypingUpdate={handleTypingUpdate}
         onTypingComplete={handleTypingComplete}
@@ -140,11 +140,11 @@ ChatComponent.propTypes = {};
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F9F7F4',
   },
   flatList: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F9F7F4',
   },
   messageList: {
     padding: 16,
@@ -156,4 +156,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {ChatComponent};
+export { ChatComponent };

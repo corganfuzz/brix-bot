@@ -21,7 +21,7 @@ AppHeader.propTypes = {
 export default AppHeader;
 
 const colors = {
-  primary: 'rgba(37,73,192, 1)',
+  primary: '#1B3139',
   textWhite: '#FFFFFF',
 };
 

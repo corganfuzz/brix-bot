@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, TextInput, TouchableOpacity, Text, StyleSheet, Platform} from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 
-const ChatInput = ({value, onChangeText, onSend}) => {
+const ChatInput = ({ value, onChangeText, onSend }) => {
   const handleSend = () => {
     if (value.trim()) {
       onSend();
@@ -23,7 +23,7 @@ const ChatInput = ({value, onChangeText, onSend}) => {
         onSubmitEditing={handleSend}
         blurOnSubmit={false}
       />
-      <TouchableOpacity 
+      <TouchableOpacity
         style={[
           styles.sendButton,
           !value.trim() && styles.sendButtonDisabled
@@ -44,8 +44,8 @@ ChatInput.propTypes = {
 };
 
 const colors = {
-  primary: 'rgba(37,73,192, 1)',
-  primaryLight: 'rgba(37,73,192, 0.7)',
+  primary: '#FF3621',
+  primaryLight: 'rgba(255, 54, 33, 0.7)',
   disabled: '#ccc',
 };
 
@@ -56,9 +56,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     paddingBottom: Platform.OS === 'ios' ? 24 : 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     borderTopWidth: 1,
-    borderTopColor: '#e0e0e0',
+    borderTopColor: '#EEEDE9',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -72,14 +72,14 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: 42,
     maxHeight: 100,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#EEEDE9',
     borderRadius: 21,
     paddingHorizontal: 16,
     paddingVertical: 10,
     paddingTop: 10,
     fontSize: 15,
     marginRight: 8,
-    color: '#1a1a1a',
+    color: '#1B3139',
     borderWidth: 1,
     borderColor: '#e0e0e0',
   },

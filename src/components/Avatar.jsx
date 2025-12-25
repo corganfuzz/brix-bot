@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-const Avatar = ({isUser}) => {
+const Avatar = ({ isUser }) => {
   const avatarStyle = {
     borderRadius: 50,
     width: 40,
@@ -28,8 +28,8 @@ const Avatar = ({isUser}) => {
 };
 
 const colors = {
-  userAvatar: 'rgba(188,73,129, 1)',
-  chatBotAvatar: 'rgba(37,73,192, 1)',
+  userAvatar: '#1B3139',
+  chatBotAvatar: '#FF3621',
   textWhite: '#fff',
 };
 

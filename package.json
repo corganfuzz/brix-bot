@@ -10,14 +10,17 @@
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-agent-runtime": "^3.709.0",
+    "@expo/metro-runtime": "~3.2.3",
     "@react-native-async-storage/async-storage": "^2.2.0",
     "expo": "~51.0.28",
     "expo-status-bar": "~1.12.1",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-native": "0.74.5",
     "react-native-svg": "^15.14.0",
-    "react-native-type-animation": "^0.4.4"
+    "react-native-type-animation": "^0.4.4",
+    "react-native-web": "~0.19.10"
   },
   "devDependencies": {
     "@aws-sdk/credential-providers": "^3.913.0",

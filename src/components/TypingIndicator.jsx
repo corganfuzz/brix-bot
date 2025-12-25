@@ -1,12 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {View, Animated, StyleSheet, Text} from 'react-native';
-import {ChatBotAvatar} from './Avatar';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Animated, StyleSheet, Text } from 'react-native';
+import { ChatBotAvatar } from './Avatar';
 
 const LOADING_MESSAGES = [
   'Thinking...',
-  'Searching knowledge base...',
-  'Analyzing mortgage data...',
-  'Checking FRED API...',
+  'Querying Databricks...',
+  'Analyzing data points...',
+  'Synthesizing insights...',
   'Finalizing response...',
 ];
 
@@ -63,15 +63,15 @@ const TypingIndicator = () => {
       ]}>
       <ChatBotAvatar />
       <View style={styles.typingContainer}>
-        <Animated.View 
+        <Animated.View
           style={[
             styles.pulsingDot,
             {
               transform: [{ scale: pulseAnim }]
             }
-          ]} 
+          ]}
         />
-        <Animated.Text 
+        <Animated.Text
           style={[
             styles.loadingText,
             {
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   bubbleContainer: {},
   typingContainer: {
     alignSelf: 'flex-start',
-    backgroundColor: 'rgba(37,73,192, 0.08)',
+    backgroundColor: '#FFFFFF',
     borderRadius: 12,
     borderBottomLeftRadius: 0,
     padding: 16,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 1,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.05,
     shadowRadius: 2,
     elevation: 2,
   },
@@ -113,11 +113,11 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: 'rgba(37,73,192, 0.7)',
+    backgroundColor: '#FF3621',
     marginRight: 10,
   },
   loadingText: {
-    color: 'rgba(37,73,192, 0.75)',
+    color: '#1B3139',
     fontSize: 14,
     fontWeight: '400',
     letterSpacing: 0.5,

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Animated, StyleSheet, Dimensions } from 'react-native';
-import FreddieMacLogo from '../../media/FreddieMacLogo.svg';
+import DatabrixLogo from '../../media/databrixlogo.svg';
 
 const { width, height } = Dimensions.get('window');
 
@@ -26,7 +26,7 @@ const SplashScreen = ({ onFinish }) => {
   }, [fadeAnim, onFinish]);
 
   return (
-    <Animated.View 
+    <Animated.View
       style={[
         styles.container,
         {
@@ -35,11 +35,9 @@ const SplashScreen = ({ onFinish }) => {
       ]}
     >
       <View style={styles.logoContainer}>
-        <FreddieMacLogo
-          width={Math.min(width, height) * 0.6}
-          height={Math.min(width, height) * 0.3}
-          color="white"
-          fill="white"
+        <DatabrixLogo
+          width={Math.min(width, height) * 0.8}
+          height={Math.min(width, height) * 0.4}
         />
       </View>
     </Animated.View>
@@ -54,7 +52,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: '#032e6d',
+    backgroundColor: '#FF3621',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 999999,
