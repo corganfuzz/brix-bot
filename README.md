@@ -1,6 +1,6 @@
 # Mortgage Expert AI
 
-![Demo](media/brixgif.gif)
+![Demo](media/brixvid.gif)
 
 A premium iOS application powered by GenAI to provide expert mortgage guidance. This app leverages Amazon Bedrock and a robust data backend to deliver intelligent, real-time responses for mortgage-related queries.
 
