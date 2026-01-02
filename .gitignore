@@ -45,5 +45,6 @@ aws-credentials.js
 
 /*.md
 !/README.md
+!/ios-setup.md
 /*.txt
 docs/

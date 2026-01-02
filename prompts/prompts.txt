@@ -1,0 +1,61 @@
+# 🏦 Mortgage Xpert: Ultimate Prompt Library
+
+This library is organized by functional area to help you demonstrate the full power of your Generative AI + Modern Data Stack.
+
+---
+
+## 📊 Category 1: Real-Time Market Data (API Integration)
+*Use these to show the Agent fetching live data from the Federal Reserve (FRED).*
+
+- "What is the current 30-year fixed mortgage rate as of today?"
+- "Get me the latest 15-year fixed rate and the 10-year Treasury yield pulse."
+- "How does the current 5/1 ARM rate compare to the 30-year fixed benchmark?"
+- "Check the market and tell me if interest rates have increased or decreased this week."
+
+---
+
+## 📖 Category 2: Guidelines & Intelligence (Knowledge Base)
+*Use these to show the Agent retrieving specific internal info from your PDF documents in S3/OpenSearch.*
+
+- "Based on our internal guidelines, what is the maximum Debt-to-Income (DTI) ratio for a conventional loan?"
+- "What are the specific documentation requirements for self-employed borrowers?"
+- "Define 'LTV' according to our internal mortgage dictionary."
+- "Explain the difference between a 'Conforming' and 'Jumbo' loan based on our specific regional limits."
+- "Give me a summary of the FHA appraisal requirements described in our source docs."
+
+---
+
+## 🔄 Category 3: Data Engineering & Ingestion (Databricks Flow)
+*Use these to trigger the landing of data into your S3 'raw' bucket and update Databricks.*
+
+- "Perform a full synchronization of all mortgage indices to our data lake."
+- "Sync the last 100 historical observations for the 30-year fixed series for our trend dashboard."
+- "I need to populate Databricks with comparative data. Please land the 15-year and ARM history in S3."
+- "Gather the latest economic benchmarks and save them for the data science team's weekly model training."
+- "Run a massive sweep of the FRED API for all supported indices and store the results in our bronze layer."
+
+---
+
+## 📈 Category 4: Multi-Series Comparative Analysis
+*Use these to show off the 'Comp' functionality and spread calculations.*
+
+- "Analyze the spread between the 10-year Treasury yield and the 30-year fixed mortgage rate."
+- "Compare the volatility of the 15-year fixed rate vs the 5/1 ARM over the last several months."
+- "Prepare a report on the current 'yield curve' impact on mortgage pricing based on today's latest figures."
+- "Is the 15-year fixed rate currently below or above its 50-day moving average?"
+
+---
+
+## 🧑‍💼 Category 5: Advisory & Planning (Complex Reasoning)
+*Use these to show the Agent combining Tools + Knowledge Base to solve a problem.*
+
+- "A lead has a 720 credit score and 10% down. Based on current rates and our guidelines, what loan product should I recommend?"
+- "Given that the 10-year Treasury is rising, should we advise our clients to lock their rates now or wait? Explain why based on market trends."
+- "Check if our current 30-year rate is within the historical 'spread' range and verify if this meets our internal risk policy."
+
+---
+
+### 💡 Pro Tip for Databricks
+After running any prompt from **Category 3**, head over to Databricks and run:
+`REFRESH TABLE mortgage_xpert.bronze.mortgage_rates;`
+Then check your **Trend Dashboards** to see the new data appearing in real-time!
