@@ -48,3 +48,4 @@ aws-credentials.js
 !/ios-setup.md
 /*.txt
 docs/
+.env

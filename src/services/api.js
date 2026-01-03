@@ -1,9 +1,15 @@
-
 const USE_LOCAL_PROXY = false;
 
 const LOCAL_PROXY_URL = 'http://localhost:3001/invoke-agent';
 
+const API_GATEWAY_URL = process.env.API_GATEWAY_URL;
+const API_KEY = process.env.API_KEY;
 
+if (!USE_LOCAL_PROXY && (!API_GATEWAY_URL || !API_KEY)) {
+  throw new Error(
+    'Missing API_GATEWAY_URL or API_KEY. Did you set your environment variables?'
+  );
+}
 
 const fetchChatAPI = async (message, sessionId = null) => {
   const url = USE_LOCAL_PROXY ? LOCAL_PROXY_URL : API_GATEWAY_URL;
@@ -42,12 +48,12 @@ const fetchChatAPI = async (message, sessionId = null) => {
     const cacheAge = response.headers.get('x-cache-age-seconds');
     const cacheable = response.headers.get('x-cacheable');
 
-    console.log(`📥 [${mode}] Response:`, data.response?.substring(0, 100) + '...');
-    console.log('📚 Citations:', Object.keys(data.citations || {}).length, 'sources');
-    console.log('📊 Has real-time data:', data.hasRealTimeData);
+    console.log(`📥 [${mode}] Response:`, data.response?.substring(0, 50) + '...');
+    console.log('📚 Citation Map:', JSON.stringify(data.citations || {}, null, 2));
+    console.log('📊 Real-Time Metadata:', data.hasRealTimeData);
 
     if (cacheStatus) {
-      console.log(`⚡ Cache: ${cacheStatus}${cacheAge ? ` (age: ${cacheAge}s)` : ''}, Cacheable: ${cacheable || 'N/A'}`);
+      console.log(`⚡ Cache: ${cacheStatus}${cacheAge ? ` (age: ${cacheAge}s)` : ''}`);
     }
 
     return {
@@ -74,3 +80,4 @@ const fetchChatAPI = async (message, sessionId = null) => {
 };
 
 export { fetchChatAPI };
+
